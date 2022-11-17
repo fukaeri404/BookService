@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<VBox alignment="TOP_CENTER" prefHeight="300.0" prefWidth="250.0" spacing="10.0" style="-fx-border-color: black; -fx-border-radius: 20;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/18" fx:controller="com.hostmm.bct.controller.BookCardController">
+   <children>
+      <ImageView fx:id="imgviewBookImage" accessibleText="image" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+         <VBox.margin>
+            <Insets top="20.0" />
+         </VBox.margin>
+      </ImageView>
+      <Label fx:id="lblBookName" accessibleText="BookName" text="Book Name">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblAuthor" accessibleText="AuthorName" text="Author">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblInstock" accessibleText="Instock" layoutX="116.0" layoutY="178.0" text="Instock Quantity">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblPrice" accessibleText="Price" layoutX="92.0" layoutY="196.0" text="Price">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Label>
+   </children>
+</VBox>

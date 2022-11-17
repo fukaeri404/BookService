@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<VBox alignment="TOP_CENTER" prefHeight="500.0" prefWidth="400.0" spacing="20.0" style="-fx-background-color: #22A78C;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/18" fx:controller="com.hostmm.bct.controller.LoginController">
+   <children>
+      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/ui/bus.png" />
+         </image>
+         <VBox.margin>
+            <Insets top="40.0" />
+         </VBox.margin>
+      </ImageView>
+      <JFXTextField fx:id="tfUsername" focusColor="WHITE" labelFloat="true" prefHeight="30.0" prefWidth="300.0" promptText="enter your username" style="-fx-background-color: #eee;">
+         <VBox.margin>
+            <Insets left="50.0" right="50.0" top="20.0" />
+         </VBox.margin>
+      </JFXTextField>
+      <JFXPasswordField fx:id="pfPassword" focusColor="WHITE" promptText="enter your password" style="-fx-background-color: #eee;">
+         <VBox.margin>
+            <Insets left="50.0" right="50.0" />
+         </VBox.margin>
+      </JFXPasswordField>
+      <JFXComboBox fx:id="cobRole" focusColor="WHITE" prefHeight="26.0" prefWidth="166.0" promptText="Choose Your Role" style="-fx-background-color: #eee;" />
+      <Label fx:id="lblError" alignment="CENTER" prefHeight="18.0" prefWidth="268.0" style="-fx-background-color: #21201E;" text="*username or password is incorrect" textFill="#ff1200">
+         <font>
+            <Font name="Arial Bold" size="15.0" />
+         </font>
+      </Label>
+      <JFXButton fx:id="btnLogin" onAction="#processLogin" prefHeight="26.0" prefWidth="81.0" style="-fx-background-color: #497174;" text="Login" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="12.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <VBox.margin>
+            <Insets top="5.0" />
+         </VBox.margin>
+      </JFXButton>
+      <Label alignment="BOTTOM_RIGHT" prefHeight="30.0" prefWidth="400.0" text="BookingCarTicket v1.0" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+         <padding>
+            <Insets right="5.0" />
+         </padding>
+      </Label>
+   </children>
+</VBox>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox prefHeight="700.0" prefWidth="830.0" style="-fx-background-color: #eee;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hostmm.bct.controller.OrderSwitchController">
+   <children>
+      <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="200.0">
+         <children>
+            <JFXComboBox fx:id="cobState" focusColor="WHITE" focusTraversable="false" prefHeight="35.0" prefWidth="150.0" promptText="Choose State" unFocusColor="#22a78c" />
+            <JFXTextField fx:id="tfSearch" focusColor="WHITE" focusTraversable="false" prefHeight="26.0" prefWidth="239.0" promptText=" Search" unFocusColor="#22a78c">
+               <HBox.margin>
+                  <Insets left="400.0" />
+               </HBox.margin>
+            </JFXTextField>
+         </children>
+         <padding>
+            <Insets left="20.0" right="20.0" />
+         </padding>
+      </HBox>
+      <TableView fx:id="tvOrder" focusTraversable="false" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+        <columns>
+          <TableColumn fx:id="orderID" prefWidth="75.0" text="orderID" />
+          <TableColumn fx:id="userID" prefWidth="75.0" text="userID" />
+            <TableColumn fx:id="orderedDate" prefWidth="75.0" text="orderedDate" />
+            <TableColumn fx:id="phone" prefWidth="75.0" text="phone" />
+            <TableColumn fx:id="address" prefWidth="75.0" text="address" />
+            <TableColumn fx:id="totalAmount" prefWidth="75.0" text="totalAmount" />
+            <TableColumn fx:id="purchasedBooks" prefWidth="75.0" text="purchasedBooks" />
+        </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+   </children>
+</VBox>

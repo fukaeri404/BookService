@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<HBox prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hostmm.bct.controller.BookRegisterController">
+   <children>
+      <AnchorPane prefWidth="300.0">
+         <children>
+            <ImageView fx:id="imgviewBook" fitHeight="241.0" fitWidth="202.0" layoutX="49.0" layoutY="199.0" onMouseClicked="#processBookImage" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/ui/photo-book.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <GridPane HBox.hgrow="ALWAYS">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="250.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <JFXTextField fx:id="tfBookID" alignment="CENTER" editable="false" GridPane.columnIndex="1">
+               <GridPane.margin>
+                  <Insets right="50.0" />
+               </GridPane.margin>
+            </JFXTextField>
+            <Label prefHeight="23.0" prefWidth="177.0" text="Fill Book Data">
+               <font>
+                  <Font name="Arial Bold" size="20.0" />
+               </font>
+            </Label>
+            <TextField fx:id="tfName" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets right="50.0" />
+               </GridPane.margin>
+            </TextField>
+            <TextField fx:id="tfAuthor" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets right="50.0" />
+               </GridPane.margin>
+            </TextField>
+            <TextField fx:id="tfPages" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <GridPane.margin>
+                  <Insets right="50.0" />
+               </GridPane.margin>
+            </TextField>
+            <TextField fx:id="tfPrice" GridPane.columnIndex="1" GridPane.rowIndex="7">
+               <GridPane.margin>
+                  <Insets right="50.0" />
+               </GridPane.margin>
+            </TextField>
+            <TextField fx:id="tfInstock" GridPane.columnIndex="1" GridPane.rowIndex="5">
+               <GridPane.margin>
+                  <Insets right="50.0" />
+               </GridPane.margin>
+            </TextField>
+            <TextArea fx:id="taDescription" prefHeight="200.0" prefWidth="200.0" promptText="enter description about this book" GridPane.columnSpan="2" GridPane.rowIndex="8" GridPane.rowSpan="2">
+               <GridPane.margin>
+                  <Insets left="30.0" right="20.0" />
+               </GridPane.margin>
+            </TextArea>
+            <Label alignment="CENTER_RIGHT" prefWidth="250.0" text="Name :" GridPane.rowIndex="1">
+               <font>
+                  <Font name="Arial Bold" size="15.0" />
+               </font>
+               <padding>
+                  <Insets right="10.0" />
+               </padding>
+            </Label>
+            <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="97.0" prefWidth="250.0" text="Author :" GridPane.rowIndex="2">
+               <font>
+                  <Font name="Arial Bold" size="15.0" />
+               </font>
+               <padding>
+                  <Insets right="10.0" />
+               </padding>
+            </Label>
+            <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="165.0" prefWidth="250.0" text="Pages :" GridPane.rowIndex="3">
+               <font>
+                  <Font name="Arial Bold" size="15.0" />
+               </font>
+               <padding>
+                  <Insets right="10.0" />
+               </padding>
+            </Label>
+            <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="232.0" prefWidth="250.0" text="Instock Quantity :" GridPane.rowIndex="5">
+               <font>
+                  <Font name="Arial Bold" size="15.0" />
+               </font>
+               <padding>
+                  <Insets right="10.0" />
+               </padding>
+            </Label>
+            <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="300.0" prefWidth="250.0" text="Category :" GridPane.rowIndex="6">
+               <font>
+                  <Font name="Arial Bold" size="15.0" />
+               </font>
+               <padding>
+                  <Insets right="10.0" />
+               </padding>
+            </Label>
+            <ComboBox fx:id="cobCategory" prefHeight="26.0" prefWidth="162.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="367.0" prefWidth="250.0" text="Price :" GridPane.rowIndex="7">
+               <font>
+                  <Font name="Arial Bold" size="15.0" />
+               </font>
+               <padding>
+                  <Insets right="10.0" />
+               </padding>
+            </Label>
+            <ButtonBar GridPane.columnIndex="1" GridPane.rowIndex="11">
+               <buttons>
+                  <Button layoutX="260.0" layoutY="32.0" mnemonicParsing="false" onAction="#processCancel" text="Cancel" />
+                  <Button layoutX="260.0" layoutY="32.0" mnemonicParsing="false" onAction="#processCreate" text="Create" />
+               </buttons>
+               <padding>
+                  <Insets bottom="10.0" right="30.0" />
+               </padding>
+            </ButtonBar>
+            <ComboBox fx:id="cobLanguage" prefHeight="26.0" prefWidth="162.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="134.0" prefWidth="250.0" text="Language :" GridPane.rowIndex="4">
+               <font>
+                  <Font name="Arial Bold" size="15.0" />
+               </font>
+               <padding>
+                  <Insets right="10.0" />
+               </padding>
+            </Label>
+         </children>
+      </GridPane>
+   </children>
+</HBox>
