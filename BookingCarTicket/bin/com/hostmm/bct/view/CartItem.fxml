@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="150.0" prefWidth="230.0" style="-fx-background-color: red;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView accessibleText="imageView" fitHeight="90.0" fitWidth="70.0" layoutX="22.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true" />
+      <Label accessibleText="BookName" layoutX="112.0" layoutY="15.0" prefHeight="18.0" prefWidth="116.0" text="BookName" wrapText="true" />
+      <Label fx:id="lblQxP" accessibleText="QxP" layoutX="112.0" layoutY="53.400001525878906" prefHeight="18.0" prefWidth="116.0" text="QuantityxPrice" wrapText="true" />
+      <Label fx:id="lblTotal" accessibleText="TAmount" layoutX="112.0" layoutY="91.80000305175781" prefHeight="18.0" prefWidth="116.0" text="totalAmount" />
+   </children>
+</AnchorPane>

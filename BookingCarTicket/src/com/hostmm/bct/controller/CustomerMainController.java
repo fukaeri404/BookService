@@ -7,12 +7,14 @@ import java.util.ResourceBundle;
 
 import com.hostmm.bct.model.Book;
 import com.hostmm.bct.model.BookDAO;
+import com.hostmm.bct.model.Cart;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.transitions.hamburger.HamburgerSlideCloseTransition;
 
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -23,8 +25,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -38,10 +42,10 @@ import javafx.scene.layout.VBox;
 public class CustomerMainController implements Initializable {
 
 	@FXML
-	private JFXHamburger Hamburger;
+	private AnchorPane apEachView;
 
 	@FXML
-	private AnchorPane apEachView;
+	private AnchorPane dynamicAnchorPane;
 
 	@FXML
 	private JFXComboBox<String> cobAuthor;
@@ -98,12 +102,16 @@ public class CustomerMainController implements Initializable {
 	private ImageView imgviewEachBook;
 
 	@FXML
+	private Label lblUsername;
+
+	@FXML
 	private VBox vbBookView;
 
 	private BookDAO bookDAO = new BookDAO();
-	private Book book_instance = Book.getBookInstance();
 	private int quantity;
 	private int instock;
+	private final static ObservableList<Cart> CARTLIST = Cart.getCartList();
+	private Book book = Book.getBookInstance();
 
 	@FXML
 	void processSignOut(ActionEvent event) {
@@ -123,6 +131,53 @@ public class CustomerMainController implements Initializable {
 		if (quantity > 0) {
 			quantity -= 1;
 			tfQuantity.setText(String.valueOf(quantity));
+		}
+
+	}
+
+	@FXML
+	void processAddToCart(ActionEvent event) {
+		CARTLIST.add(new Cart(this.book, Integer.parseInt(tfQuantity.getText()),
+				tfQuantity.getText() + " * " + this.book.getPrice(),
+				Double.parseDouble(tfQuantity.getText()) * this.book.getPrice()));
+		addCartItem();
+	}
+
+	@FXML
+	void processShowCart() {
+		drawer.setDefaultDrawerSize(250);
+		if (drawer.isHidden()) {
+			drawer.open();
+		} else {
+			drawer.close();
+		}
+	}
+
+	@FXML
+	void processShowBooks() {
+		apEachView.setVisible(false);
+		vbBookView.setVisible(true);
+	}
+
+	@FXML
+	void processShowNotis() {
+
+	}
+
+	@FXML
+	void processClear() {
+		addCard(bookDAO.getBookList());
+		if (cobAuthor.getValue() != null) {
+			cobAuthor.setValue(null);
+			cobAuthor.setPromptText("");
+		}
+		if (cobCategory.getValue() != null) {
+			cobCategory.setValue(null);
+			cobCategory.setPromptText("");
+		}
+		if (cobLanguage.getValue() != null) {
+			cobLanguage.setValue(null);
+			cobLanguage.setPromptText("");
 		}
 
 	}
@@ -236,19 +291,9 @@ public class CustomerMainController implements Initializable {
 				card.setOnMouseClicked((e) -> {
 					vbBookView.setVisible(false);
 					apEachView.setVisible(true);
-					tfBookID.setText(book.getBookID());
-					tfBookName.setText(book.getBookName());
-					tfAuthor.setText(book.getAuthor());
-					tfPages.setText(String.valueOf(book.getPages()));
-					tfLanguage.setText(book.getLanguage());
-					tfCategory.setText(book.getCategory());
-					tfPrice.setText(String.valueOf(book.getPrice()));
-					tfInStock.setText(String.valueOf(book.getInstock()));
-					imgviewEachBook.setImage(new Image(
-							getClass().getResourceAsStream("/com/hostmm/bct/image/book/" + book.getImageName())));
-					taDescription.setText(book.getDescription());
-					instock = Integer.parseInt(tfInStock.getText());
-
+					FillSelectedBookInfo(book.getBookID());
+					tfQuantity.setText("0");
+					this.book = book;
 				});
 
 				flowPane.getChildren().add(card);
@@ -260,49 +305,125 @@ public class CustomerMainController implements Initializable {
 	}
 
 	void initDrawer() {
-
 		try {
 			VBox toolbar = FXMLLoader.load(getClass().getResource("/com/hostmm/bct/view/Toolbar.fxml"));
 			drawer.setSidePane(toolbar);
-			drawer.setDefaultDrawerSize(200);
-
-			for (Node node : toolbar.getChildren()) {
-				if (node.getAccessibleText() != null) {
-					node.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
-						switch (node.getAccessibleText()) {
-						case "NOTI":
-							stackPane.setStyle("-fx-background-color:red");
-							break;
-						case "CART":
-							stackPane.setStyle("-fx-background-color:red");
-							break;
-						case "PROFILE":
-							stackPane.setStyle("-fx-background-color:red");
-							break;
-						default:
-							break;
-						}
-					});
-				}
-			}
+			drawer.open();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		HamburgerSlideCloseTransition task = new HamburgerSlideCloseTransition(Hamburger);
-		task.setRate(-1);
-		Hamburger.addEventHandler(MouseEvent.MOUSE_CLICKED, (Event event) -> {
-			task.setRate(task.getRate() * -1);
-			task.play();
-			if (drawer.isShown()) {
-				drawer.close();
-				drawer.setVisible(false);
-			} else {
-				drawer.open();
-				drawer.setVisible(true);
+//		HamburgerSlideCloseTransition task = new HamburgerSlideCloseTransition(Hamburger);
+//		task.setRate(-1);
+
+	}
+
+	void addCartItem() {
+
+		try {
+			VBox toolbar = FXMLLoader.load(getClass().getResource("/com/hostmm/bct/view/Toolbar.fxml"));
+			for (Node node : toolbar.getChildren()) {
+				if (node.getAccessibleText() != null) {
+					switch (node.getAccessibleText()) {
+					case "StackPane": {// start of StackPane
+						for (Node node2 : ((StackPane) node).getChildren()) {
+							if (node2.getAccessibleText() != null) {
+								switch (node2.getAccessibleText()) {
+								case "ScrollPane": {
+									Node node3 = ((ScrollPane) node2).getContent();
+									if (node3.getAccessibleText() != null) {
+										for (Node node4 : ((StackPane) node3).getChildren()) {
+											if (node4.getAccessibleText() != null) {
+												switch (node4.getAccessibleText()) {
+												case "FlowPane": {
+													// start of flowPane
+													for (Cart cart : CARTLIST) {
+														AnchorPane cartItem = FXMLLoader.load(getClass()
+																.getResource("/com/hostmm/bct/view/CartItem.fxml"));
+
+														cartItem.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
+															apEachView.setVisible(true);
+															FillSelectedBookInfo(cart.getBook().getBookID());
+															tfQuantity.setText(String.valueOf(cart.getQuantity()));
+
+														});
+
+														for (Node node5 : cartItem.getChildren()) {
+															if (node5.getAccessibleText() != null) {
+																switch (node5.getAccessibleText()) {
+																case "BookName":
+																	((Label) node5)
+																			.setText(cart.getBook().getBookName());
+																	break;
+																case "QxP":
+																	((Label) node5).setText(cart.getQxP());
+																	break;
+																case "TAmount":
+																	((Label) node5).setText(
+																			String.valueOf(cart.getTotalAmount()));
+																	break;
+																case "imageView":
+																	((ImageView) node5).setImage(
+																			new Image(getClass().getResourceAsStream(
+																					"/com/hostmm/bct/image/book/"
+																							+ cart.getBook()
+																									.getImageName())));
+																	break;
+																default:
+																	break;
+																}
+															}
+														}
+														((FlowPane) node4).getChildren().add(cartItem);
+													}
+
+												}
+
+													break;
+
+												default:
+													break;
+												}
+											}
+										}
+									}
+								}
+									break;// break of flowPane
+								default:
+									break;
+								}
+							}
+						}
+					}
+						break;// break of StackPane
+					default:
+						break;
+					}
+				}
 			}
-		});
+			drawer.setSidePane(toolbar);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	void FillSelectedBookInfo(String ID) {
+		Book book = bookDAO.getBook("bookID", ID);
+
+		tfBookID.setText(book.getBookID());
+		tfBookName.setText(book.getBookName());
+		tfAuthor.setText(book.getAuthor());
+		tfPages.setText(String.valueOf(book.getPages()));
+		tfLanguage.setText(book.getLanguage());
+		tfCategory.setText(book.getCategory());
+		tfPrice.setText(String.valueOf(book.getPrice()));
+		tfInStock.setText(String.valueOf(book.getInstock()));
+		imgviewEachBook.setImage(
+				new Image(getClass().getResourceAsStream("/com/hostmm/bct/image/book/" + book.getImageName())));
+		taDescription.setText(book.getDescription());
+		this.instock = Integer.parseInt(tfInStock.getText());
 
 	}
 
