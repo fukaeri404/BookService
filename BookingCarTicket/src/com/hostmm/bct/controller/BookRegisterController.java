@@ -117,7 +117,7 @@ public class BookRegisterController implements Initializable {
 			imageName = this.currentImageName;
 
 		Book book = new Book(bookID, bookName, author, pages, language, instock, category, price, description,
-				imageName, bookID, true);
+				imageName, bookHistory, true);
 
 		File outputFile = new File("src/com/hostmm/bct/image/book/" + imageName);
 

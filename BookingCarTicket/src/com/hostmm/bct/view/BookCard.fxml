@@ -6,8 +6,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<VBox alignment="TOP_CENTER" prefHeight="300.0" prefWidth="250.0" spacing="10.0" style="-fx-border-color: black; -fx-border-radius: 20;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/18" fx:controller="com.hostmm.bct.controller.BookCardController">
+<VBox alignment="TOP_CENTER" prefHeight="300.0" prefWidth="250.0" spacing="10.0" style="-fx-border-color: black; -fx-border-radius: 20;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ImageView fx:id="imgviewBookImage" accessibleText="image" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
          <VBox.margin>

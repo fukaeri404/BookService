@@ -107,6 +107,85 @@ public class BookDAO {
 
 	}
 
+	public ObservableList<Book> getOneSituationBookList(String columnName, String value) {
+
+		String sql = "select * from book where " + columnName + " = '" + value + "' && isActive = true;";
+		ObservableList<Book> bookList = FXCollections.observableArrayList();
+		connection = DBConnection.getDBconnection();
+		try {
+			stmt = connection.createStatement();
+			rs = stmt.executeQuery(sql);
+
+			while (rs.next()) {
+				bookList.add(new Book(rs.getString("bookID"), rs.getString("bookName"), rs.getString("author"),
+						rs.getInt("pages"), rs.getString("language"), rs.getInt("instock"), rs.getString("category"),
+						rs.getDouble("price"), rs.getString("description"), rs.getString("imageName"),
+						rs.getString("bookHistory"), rs.getBoolean("isActive")));
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		return bookList;
+
+	}
+
+	public ObservableList<Book> getTwoSituationBookList(String columnName, String value, String columnName2,
+			String value2) {
+
+		String sql = "select * from book where " + columnName + " = '" + value + "' && " + columnName2 + " = '" + value2
+				+ "' && isActive = true;";
+		ObservableList<Book> bookList = FXCollections.observableArrayList();
+		connection = DBConnection.getDBconnection();
+		try {
+			stmt = connection.createStatement();
+			rs = stmt.executeQuery(sql);
+
+			while (rs.next()) {
+				bookList.add(new Book(rs.getString("bookID"), rs.getString("bookName"), rs.getString("author"),
+						rs.getInt("pages"), rs.getString("language"), rs.getInt("instock"), rs.getString("category"),
+						rs.getDouble("price"), rs.getString("description"), rs.getString("imageName"),
+						rs.getString("bookHistory"), rs.getBoolean("isActive")));
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		return bookList;
+
+	}
+
+	public ObservableList<Book> getThreeSituationBookList(String columnName, String value, String columnName2,
+			String value2, String columnName3, String value3) {
+
+		String sql = "select * from book where " + columnName + " = '" + value + "' && " + columnName2 + " = '" + value2
+				+ "' && " + columnName3 + " = '" + value3 + "' && isActive = true;";
+		ObservableList<Book> bookList = FXCollections.observableArrayList();
+		connection = DBConnection.getDBconnection();
+		try {
+			stmt = connection.createStatement();
+			rs = stmt.executeQuery(sql);
+
+			while (rs.next()) {
+				bookList.add(new Book(rs.getString("bookID"), rs.getString("bookName"), rs.getString("author"),
+						rs.getInt("pages"), rs.getString("language"), rs.getInt("instock"), rs.getString("category"),
+						rs.getDouble("price"), rs.getString("description"), rs.getString("imageName"),
+						rs.getString("bookHistory"), rs.getBoolean("isActive")));
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		return bookList;
+
+	}
+
 	public Book getBook(String columnName, String value) {
 
 		Book book = null;

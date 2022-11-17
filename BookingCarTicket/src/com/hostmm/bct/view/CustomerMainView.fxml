@@ -1,18 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXDrawer?>
 <?import com.jfoenix.controls.JFXHamburger?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <BorderPane prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hostmm.bct.controller.CustomerMainController">
    <top>
@@ -40,7 +49,7 @@
    <center>
       <StackPane fx:id="stackPane" alignment="CENTER_LEFT" prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <VBox prefHeight="200.0" prefWidth="100.0">
+            <VBox fx:id="vbBookView" prefHeight="200.0" prefWidth="100.0">
                <children>
                   <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="200.0" spacing="50.0">
                      <children>
@@ -57,6 +66,149 @@
                   <FlowPane fx:id="flowPane" hgap="10.0" prefHeight="200.0" prefWidth="200.0" vgap="10.0" VBox.vgrow="ALWAYS" />
                </children>
             </VBox>
+            <AnchorPane fx:id="apEachView" prefHeight="200.0" prefWidth="200.0" visible="false">
+               <children>
+                  <ImageView fx:id="imgviewEachBook" fitHeight="203.0" fitWidth="212.0" layoutX="63.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/ui/bus.png" />
+                     </image>
+                  </ImageView>
+                  <GridPane layoutX="306.0" layoutY="28.0" prefHeight="408.0" prefWidth="538.0">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="253.20001220703125" minWidth="10.0" prefWidth="220.8000244140625" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="340.00002441406247" minWidth="10.0" prefWidth="318.39997558593757" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <JFXTextField fx:id="tfBookName" alignment="CENTER" editable="false" prefHeight="26.0" prefWidth="308.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label alignment="CENTER_RIGHT" prefHeight="18.0" prefWidth="200.0" text="Book's Name :" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="Arial" size="19.0" />
+                           </font>
+                           <padding>
+                              <Insets right="10.0" />
+                           </padding>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="65.0" prefHeight="18.0" prefWidth="200.0" text="Book's Author :" GridPane.rowIndex="2">
+                           <font>
+                              <Font name="Arial" size="19.0" />
+                           </font>
+                           <padding>
+                              <Insets right="10.0" />
+                           </padding>
+                        </Label>
+                        <JFXTextField fx:id="tfAuthor" alignment="CENTER" editable="false" layoutX="231.0" layoutY="64.0" prefHeight="26.0" prefWidth="308.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="152.0" prefHeight="18.0" prefWidth="200.0" text="Book's ID :">
+                           <font>
+                              <Font name="Arial" size="19.0" />
+                           </font>
+                           <padding>
+                              <Insets right="10.0" />
+                           </padding>
+                        </Label>
+                        <JFXTextField fx:id="tfInStock" alignment="CENTER" editable="false" layoutX="231.0" layoutY="150.0" prefHeight="26.0" prefWidth="308.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                        <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="253.0" prefHeight="18.0" prefWidth="200.0" text="Book's Pages :" GridPane.rowIndex="3">
+                           <font>
+                              <Font name="Arial" size="19.0" />
+                           </font>
+                           <padding>
+                              <Insets right="10.0" />
+                           </padding>
+                        </Label>
+                        <JFXTextField fx:id="tfPages" alignment="CENTER" editable="false" layoutX="231.0" layoutY="252.0" prefHeight="26.0" prefWidth="308.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="203.0" prefHeight="18.0" prefWidth="200.0" text="Book's Language :" GridPane.rowIndex="4">
+                           <font>
+                              <Font name="Arial" size="19.0" />
+                           </font>
+                           <padding>
+                              <Insets right="10.0" />
+                           </padding>
+                        </Label>
+                        <JFXTextField fx:id="tfLanguage" alignment="CENTER" editable="false" layoutX="231.0" layoutY="27.0" prefHeight="26.0" prefWidth="308.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="262.0" prefHeight="18.0" prefWidth="200.0" text="Book's Category :" GridPane.rowIndex="5">
+                           <font>
+                              <Font name="Arial" size="19.0" />
+                           </font>
+                           <padding>
+                              <Insets right="10.0" />
+                           </padding>
+                        </Label>
+                        <JFXTextField fx:id="tfCategory" alignment="CENTER" editable="false" layoutX="231.0" layoutY="260.0" prefHeight="26.0" prefWidth="308.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="321.0" prefHeight="18.0" prefWidth="200.0" text="Book's Price :" GridPane.rowIndex="6">
+                           <font>
+                              <Font name="Arial" size="19.0" />
+                           </font>
+                           <padding>
+                              <Insets right="10.0" />
+                           </padding>
+                        </Label>
+                        <JFXTextField fx:id="tfPrice" alignment="CENTER" editable="false" layoutX="231.0" layoutY="320.0" prefHeight="26.0" prefWidth="308.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                        <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="329.0" prefHeight="18.0" prefWidth="200.0" text="Instock Quantity :" GridPane.rowIndex="7">
+                           <font>
+                              <Font name="Arial" size="19.0" />
+                           </font>
+                           <padding>
+                              <Insets right="10.0" />
+                           </padding>
+                        </Label>
+                        <JFXTextField fx:id="tfBookID" alignment="CENTER" editable="false" layoutX="231.0" layoutY="72.0" prefHeight="26.0" prefWidth="308.0" GridPane.columnIndex="1" />
+                     </children>
+                  </GridPane>
+                  <TextArea fx:id="taDescription" layoutX="23.0" layoutY="287.0" prefHeight="337.0" prefWidth="282.0" wrapText="true">
+                     <font>
+                        <Font name="Arial" size="15.0" />
+                     </font>
+                  </TextArea>
+                  <HBox alignment="CENTER_LEFT" layoutX="350.0" layoutY="507.0" prefHeight="100.0" prefWidth="510.0" spacing="10.0">
+                     <children>
+                        <Button layoutX="170.0" layoutY="48.0" mnemonicParsing="false" onAction="#processDecreaseQuantity" prefHeight="40.0" prefWidth="33.0" text="-">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Button>
+                        <TextField fx:id="tfQuantity" alignment="CENTER" editable="false" prefHeight="40.0" prefWidth="50.0" text="0">
+                           <font>
+                              <Font name="Arial Black" size="15.0" />
+                           </font>
+                        </TextField>
+                        <Button mnemonicParsing="false" onAction="#processIncreaseQuantity" prefHeight="40.0" prefWidth="33.0" text="+">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Button>
+                        <JFXButton prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #d9ef0f;" text="Add to Cart">
+                           <HBox.margin>
+                              <Insets left="40.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font name="Arial Bold" size="14.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../image/ui/cart.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton layoutX="254.0" layoutY="35.0" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #d9ef0f;" text="Order Now">
+                           <font>
+                              <Font name="Arial Bold" size="14.0" />
+                           </font>
+                        </JFXButton>
+                     </children>
+                  </HBox>
+               </children>
+            </AnchorPane>
             <JFXDrawer fx:id="drawer" visible="false" />
          </children>
       </StackPane>

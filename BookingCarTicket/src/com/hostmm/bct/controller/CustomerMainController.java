@@ -13,6 +13,8 @@ import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.transitions.hamburger.HamburgerSlideCloseTransition;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -23,9 +25,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -34,6 +39,9 @@ public class CustomerMainController implements Initializable {
 
 	@FXML
 	private JFXHamburger Hamburger;
+
+	@FXML
+	private AnchorPane apEachView;
 
 	@FXML
 	private JFXComboBox<String> cobAuthor;
@@ -48,23 +56,80 @@ public class CustomerMainController implements Initializable {
 	private JFXDrawer drawer;
 
 	@FXML
+	private FlowPane flowPane;
+
+	@FXML
 	private StackPane stackPane;
+
+	@FXML
+	private TextArea taDescription;
+
+	@FXML
+	private JFXTextField tfAuthor;
+
+	@FXML
+	private JFXTextField tfBookID;
+
+	@FXML
+	private JFXTextField tfBookName;
+
+	@FXML
+	private JFXTextField tfCategory;
+
+	@FXML
+	private JFXTextField tfInStock;
+
+	@FXML
+	private JFXTextField tfLanguage;
+
+	@FXML
+	private JFXTextField tfPages;
+
+	@FXML
+	private JFXTextField tfPrice;
+
+	@FXML
+	private TextField tfQuantity;
 
 	@FXML
 	private JFXTextField tfSearch;
 
 	@FXML
-	private FlowPane flowPane;
+	private ImageView imgviewEachBook;
+
+	@FXML
+	private VBox vbBookView;
 
 	private BookDAO bookDAO = new BookDAO();
+	private Book book_instance = Book.getBookInstance();
+	private int quantity;
+	private int instock;
 
 	@FXML
 	void processSignOut(ActionEvent event) {
 
 	}
 
+	@FXML
+	void processIncreaseQuantity(ActionEvent event) {
+		if (quantity < instock) {
+			quantity += 1;
+			tfQuantity.setText(String.valueOf(quantity));
+		}
+	}
+
+	@FXML
+	void processDecreaseQuantity(ActionEvent event) {
+		if (quantity > 0) {
+			quantity -= 1;
+			tfQuantity.setText(String.valueOf(quantity));
+		}
+
+	}
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+
 		ObservableList<String> language = FXCollections.observableArrayList("English", "Myanmar");
 		ObservableList<String> author = FXCollections.observableArrayList(bookDAO.getAuthorList());
 		ObservableList<String> category = FXCollections.observableArrayList("Action", "Sci-Fi", "Sport", "Fantasy",
@@ -76,12 +141,72 @@ public class CustomerMainController implements Initializable {
 		System.out.println(bookDAO.getAuthorList());
 
 		initDrawer();
-		addCard();
+		addCard(bookDAO.getBookList());
+
+		cobAuthor.valueProperty().addListener(new ChangeListener<String>() {
+
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				if (newValue != null) {
+					if (cobCategory.getValue() == null && cobLanguage.getValue() == null) // author nn, both n
+						addCard(bookDAO.getOneSituationBookList("author", newValue));
+					else if (cobCategory.getValue() != null && cobLanguage.getValue() != null) // author nn, both nn
+						addCard(bookDAO.getThreeSituationBookList("author", newValue, "category",
+								cobCategory.getValue(), "language", cobLanguage.getValue()));
+					else if (cobCategory.getValue() == null && cobLanguage.getValue() != null) // author nn, cat n, lan
+																								// nn
+						addCard(bookDAO.getTwoSituationBookList("author", newValue, "language",
+								cobLanguage.getValue()));
+					else if (cobCategory.getValue() != null && cobLanguage.getValue() == null)
+						addCard(bookDAO.getTwoSituationBookList("author", newValue, "category",
+								cobCategory.getValue()));
+				}
+			}
+		});
+
+		cobCategory.valueProperty().addListener(new ChangeListener<String>() {
+
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				if (newValue != null) {
+					if (cobAuthor.getValue() == null && cobLanguage.getValue() == null) // author nn, both n
+						addCard(bookDAO.getOneSituationBookList("category", newValue));
+					else if (cobAuthor.getValue() != null && cobLanguage.getValue() != null) // author nn, both nn
+						addCard(bookDAO.getThreeSituationBookList("category", newValue, "author", cobAuthor.getValue(),
+								"language", cobLanguage.getValue()));
+					else if (cobAuthor.getValue() == null && cobLanguage.getValue() != null) // author nn, cat n, lan nn
+						addCard(bookDAO.getTwoSituationBookList("category", newValue, "language",
+								cobLanguage.getValue()));
+					else if (cobAuthor.getValue() != null && cobLanguage.getValue() == null)
+						addCard(bookDAO.getTwoSituationBookList("category", newValue, "author", cobAuthor.getValue()));
+				}
+			}
+		});
+		cobLanguage.valueProperty().addListener(new ChangeListener<String>() {
+
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				if (newValue != null) {
+					if (cobCategory.getValue() == null && cobAuthor.getValue() == null) // author nn, both n
+						addCard(bookDAO.getOneSituationBookList("language", newValue));
+					else if (cobCategory.getValue() != null && cobAuthor.getValue() != null) // author nn, both nn
+						addCard(bookDAO.getThreeSituationBookList("language", newValue, "category",
+								cobCategory.getValue(), "author", cobAuthor.getValue()));
+					else if (cobCategory.getValue() == null && cobAuthor.getValue() != null) // author nn, cat n, lan
+																								// nn
+						addCard(bookDAO.getTwoSituationBookList("language", newValue, "author", cobAuthor.getValue()));
+					else if (cobCategory.getValue() != null && cobAuthor.getValue() == null)
+						addCard(bookDAO.getTwoSituationBookList("language", newValue, "category",
+								cobCategory.getValue()));
+				}
+			}
+		});
 
 	}
 
-	void addCard() {
-		ObservableList<Book> bookList = bookDAO.getBookList();
+	void addCard(ObservableList<Book> bookList) {
+
+		flowPane.getChildren().clear();
 		for (Book book : bookList) {
 			try {
 				VBox card = (VBox) FXMLLoader.load(getClass().getResource("/com/hostmm/bct/view/BookCard.fxml"));
@@ -109,7 +234,21 @@ public class CustomerMainController implements Initializable {
 				}
 
 				card.setOnMouseClicked((e) -> {
-					System.out.println(book.getBookID());
+					vbBookView.setVisible(false);
+					apEachView.setVisible(true);
+					tfBookID.setText(book.getBookID());
+					tfBookName.setText(book.getBookName());
+					tfAuthor.setText(book.getAuthor());
+					tfPages.setText(String.valueOf(book.getPages()));
+					tfLanguage.setText(book.getLanguage());
+					tfCategory.setText(book.getCategory());
+					tfPrice.setText(String.valueOf(book.getPrice()));
+					tfInStock.setText(String.valueOf(book.getInstock()));
+					imgviewEachBook.setImage(new Image(
+							getClass().getResourceAsStream("/com/hostmm/bct/image/book/" + book.getImageName())));
+					taDescription.setText(book.getDescription());
+					instock = Integer.parseInt(tfInStock.getText());
+
 				});
 
 				flowPane.getChildren().add(card);

@@ -7,9 +7,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="640.0" prefWidth="200.0" style="-fx-background-color: yellow;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="640.0" prefWidth="250.0" style="-fx-background-color: yellow;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <JFXButton accessibleText="NOTI" prefHeight="80.0" prefWidth="200.0" style="-fx-border-color: black;" text=" Notifications">
+      <JFXButton accessibleText="NOTI" prefHeight="80.0" prefWidth="250.0" style="-fx-border-color: black;" text=" Notifications">
          <graphic>
             <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -24,7 +24,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXButton accessibleText="CART" prefHeight="80.0" prefWidth="200.0" style="-fx-border-color: black;" text="   Your Cart">
+      <JFXButton accessibleText="CART" prefHeight="80.0" prefWidth="250.0" style="-fx-border-color: black;" text="   Your Cart">
          <graphic>
             <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -39,7 +39,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXButton accessibleText="PROFILE" layoutX="10.0" layoutY="70.0" prefHeight="80.0" prefWidth="200.0" style="-fx-border-color: black;" text="  My Profile">
+      <JFXButton accessibleText="PROFILE" layoutX="10.0" layoutY="70.0" prefHeight="80.0" prefWidth="250.0" style="-fx-border-color: black;" text="  My Profile">
          <graphic>
             <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                <image>
